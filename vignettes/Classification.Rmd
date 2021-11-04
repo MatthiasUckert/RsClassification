@@ -17,3 +17,17 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(RsClassification)
 ```
+
+Download the Test Project
+```{r}
+# RsClassification::download_example_project(
+#   .dir = "C:/Users/MUcke/Downloads",
+#   .name = "TEST PROJECT"
+# )
+```
+
+Start Classifying
+```{r message=FALSE, warning=FALSE}
+RsClassification::run_app()
+```
+
