@@ -21,7 +21,7 @@
 golem::fill_desc(
   pkg_name = "RsClassification", # The Name of the package containing the App 
   pkg_title = "Classification App", # The Title of the package containing the App 
-  pkg_description = "A Classification App", # The Description of the package containing the App 
+  pkg_description = "A Classification App. Also other things.", # The Description of the package containing the App 
   author_first_name = "Matthias", # Your First Name
   author_last_name = "Uckert", # Your Last Name
   author_email = "Matthias.Uckert@outlook.com", # Your Email

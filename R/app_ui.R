@@ -8,9 +8,44 @@ app_ui <- function(request) {
   tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
-    # Your application UI logic 
+    # Your application UI logic
+
     fluidPage(
-      h1("RsClassification")
+      tabsetPanel(
+        tabPanel(
+          title = "Fileinput",
+          mod_dir_input_ui("dir_input_ui_1")
+        ),
+        tabPanel(
+          title = "Calssification",
+          sidebarLayout(
+            sidebarPanel = sidebarPanel(
+              width = 3,
+              mod_download_results_ui("download_results_ui_1"),
+              hr(),
+              # textInput("user", "User Name", placeholder = "User Name"),
+              DT::dataTableOutput("excel_table_data_dt")
+            ),
+            mainPanel = mainPanel(
+              fluidRow(
+                actionButton("submit", "Submit"),
+                rhandsontable::rHandsontableOutput("excel_table_data_rh")
+              ),
+              hr(),
+              fluidRow(
+                htmlOutput("html_id"),
+                col_02(
+                  h4("Documents"), 
+                  DT::dataTableOutput("excel_table_docs_dt") 
+                ),
+                col_10(
+                  mod_display_files_ui("display_files_ui_1")
+                )
+              ) 
+            )
+          )
+        )
+      )
     )
   )
 }
