@@ -13,6 +13,9 @@
 
 # Engineering
 
+## Additional Export Functions
+usethis::use_r("download_example_project")
+
 ## Dependencies ----
 ## Add one line by package you want to add as dependency
 usethis::use_package("thinkr")
@@ -29,6 +32,7 @@ usethis::use_package("scales")
 usethis::use_package("stringi")
 usethis::use_package("tibble")
 usethis::use_package("tidyr")
+usethis::use_package("fs")
 
 usethis::use_pipe()
 
@@ -59,7 +63,8 @@ golem::add_css_file( "custom" )
 
 ## Add internal datasets ----
 ## If you have data in your package
-usethis::use_data_raw( name = "my_dataset", open = FALSE ) 
+usethis::use_data_raw(name = "my_dataset", open = FALSE) 
+usethis::use_data_raw(name = "test_project", open = FALSE) 
 
 ## Tests ----
 ## Add one line by test you want to create
@@ -117,3 +122,5 @@ usethis::use_gitlab_ci()
 # go to dev/03_deploy.R
 rstudioapi::navigateToFile("dev/03_deploy.R")
 
+# Vignette
+usethis::use_vignette("Classification")
