@@ -16,8 +16,7 @@ mod_dir_input_ui <- function(id){
         textInput(
           inputId = ns("dir"), 
           label = "Full Path to the Directory", 
-          placeholder = "Directory Path", 
-          value = "C:/Users/MUcke/Downloads/Test Project"
+          placeholder = "Directory Path"
           ),
         hr(),
         actionButton(ns("start_project"), label = "Start Project"),
