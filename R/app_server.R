@@ -45,7 +45,24 @@ app_server <- function(input, output, session) {
   
   # Data: Datatable in SidePanel
   output$excel_table_data_dt <- DT::renderDataTable({
-    fct_format_dt(rVdata(), .page = rVpage(), .pagelen = rVpage_length())
+    rVdata() %>%
+      dplyr::mutate(
+        all = ncol(.) - 1,
+        prc  = rowSums(!is.na(.[, -1])),
+        per = prc / all
+      ) %>%
+      dplyr::select(id, `No. of Vars` = all, `Filled (%)` = per) %>%
+      fct_format_dt(.page = rVpage(), .pagelen = rVpage_length()) %>%
+      DT::formatPercentage(3) %>%
+      DT::formatStyle(
+        columns = 1:3,
+        valueColumns = 3,
+        backgroundColor = DT::styleInterval(
+          cuts = c(.25, .50, .75),
+          values = c("#EC7063", "#F5B041", "#F4D03F", "#58D68D")
+        )
+        
+      )
   })
   
   # Docs: Datatable in MainPanel
@@ -93,3 +110,10 @@ app_server <- function(input, output, session) {
   
   
 }
+
+
+tibble::tibble(
+  id = 1:5,
+  val1 = c(1, NA, 2, NA, 3),
+  val2 = c(NA, 1, 1, NA, 1)
+)  

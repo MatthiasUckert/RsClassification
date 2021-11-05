@@ -8,8 +8,8 @@
 fct_format_rhandson <- function(.tab, .col_types) {
   tab_ <- .tab %>%
     rhandsontable::rhandsontable(useTypes = TRUE, rowHeaders = FALSE)  %>%
-    rhandsontable::hot_cols(manualColumnResize = TRUE, halign = "htCenter") %>%
-    rhandsontable::hot_rows(rowHeights = 20) %>%
+    rhandsontable::hot_cols(manualColumnResize = TRUE, halign = "htCenter", valign = 'htCenter', colWidths = 100) %>%
+    rhandsontable::hot_rows(rowHeights = 50) %>%
     rhandsontable::hot_col(col = "id", readOnly = TRUE)
   
   if (nrow(.col_types) > 0) {

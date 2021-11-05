@@ -20,7 +20,7 @@ app_ui <- function(request) {
           title = "Calssification",
           sidebarLayout(
             sidebarPanel = sidebarPanel(
-              width = 3,
+              width = 2,
               mod_download_results_ui("download_results_ui_1"),
               hr(),
               # textInput("user", "User Name", placeholder = "User Name"),
