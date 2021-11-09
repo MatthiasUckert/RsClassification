@@ -14,20 +14,84 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(RsClassification)
-```
+# Installation
 
-Download the Test Project
 ```{r}
-# RsClassification::download_example_project(
-#   .dir = "C:/Users/MUcke/Downloads",
-#   .name = "TEST PROJECT"
-# )
+# devtools::install_github("https://github.com/MatthiasUckert/RsClassification")
 ```
 
-Start Classifying
+# Library
+
+```{r setup}
+library(RsClassification); library(fs); library(openxlsx); library(kableExtra)
+```
+
+# Overview
+
+Really short description on how to use the ***RsClassification*** library
+
+## Example Project  
+
+The library includes a test project as reference. The project can be downloaded with the ***download_example_project()*** function (see below).
+
+```{r}
+RsClassification::download_example_project(
+  .dir = "FULL_PATH_TO_LOCAL_FOLDER",
+  .name = "TEST PROJECT"
+)
+```
+
+A project must always contain one excel workbook (Excel Name: input.xlsx) and a folder with documents (Folder Name: docs). The name of the parent folder is used as the general project name.
+
+The test project underlying data can also be accessed:
+
+```{r}
+.dir <- system.file("extdata/test_project", package = "RsClassification")
+fs::dir_tree(.dir_)
+
+```
+
+The input xlsx must contain two sheets:
+
+-   Sheet 1: IDs
+
+    -   The ***IDs***sheet contains a table that lists all entries to classify (id 1:n) and the attributes you want to assign to each entry (column names).
+
+    -   Additionally in row (id = 0) you can specify the column types (numeric, date, checkbox, select, dropdown, autocomplete, password, and handsontable (not implemented yet), see rhandsontable::hot_col(type).
+
+    -   IDs must be unique
+
+-   Sheet 2: Documents
+
+    -   In the ***Documents*** sheet to you can map any document in the docs folder to an IDs in the ***IDs***sheet
+
+The example file looks like this
+
+```{r}
+.path <- file.path(.dir, "input.xlsx")
+tab_ids  <- read.xlsx(.path, "IDs")
+tab_docs <- read.xlsx(.path, "Documents")
+
+```
+
+IDs Sheet
+
+```{r}
+tab_ids %>% kbl() %>% kable_paper(full_width = FALSE)
+```
+
+Documents Sheet
+
+```{r}
+tab_docs %>% kbl() %>% kable_paper(full_width = FALSE)
+```
+
+You can start classifying by using the ***run_app()*** function
+
 ```{r message=FALSE, warning=FALSE}
 RsClassification::run_app()
 ```
 
+The rest is hopefully self explanatory :-D
+
+Library will be heavily updated over the next weeks/months. Hopefully not so many breaking changes
