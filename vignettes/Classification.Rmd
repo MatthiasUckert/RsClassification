@@ -47,7 +47,7 @@ The test project underlying data can also be accessed:
 
 ```{r}
 .dir <- system.file("extdata/test_project", package = "RsClassification")
-fs::dir_tree(.dir_)
+fs::dir_tree(.dir)
 
 ```
 
@@ -89,7 +89,7 @@ tab_docs %>% kbl() %>% kable_paper(full_width = FALSE)
 You can start classifying by using the ***run_app()*** function
 
 ```{r message=FALSE, warning=FALSE}
-RsClassification::run_app()
+# RsClassification::run_app()
 ```
 
 The rest is hopefully self explanatory :-D

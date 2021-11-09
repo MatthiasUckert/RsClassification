@@ -5,7 +5,7 @@
 #' @import shiny
 #' @noRd
 app_server <- function(input, output, session) {
-  path <- ext <- . <- id <- NULL
+  path <- ext <- . <- id <- prc <- per <- NULL
   
   # Reactive Values -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
   rinit <- mod_dir_input_server("dir_input_ui_1")
