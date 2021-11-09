@@ -35,10 +35,10 @@ Really short description on how to use the ***RsClassification*** library
 The library includes a test project as reference. The project can be downloaded with the ***download_example_project()*** function (see below).
 
 ```{r}
-RsClassification::download_example_project(
-  .dir = "FULL_PATH_TO_LOCAL_FOLDER",
-  .name = "TEST PROJECT"
-)
+# RsClassification::download_example_project(
+#   .dir = "FULL_PATH_TO_LOCAL_FOLDER",
+#   .name = "TEST PROJECT"
+# )
 ```
 
 A project must always contain one excel workbook (Excel Name: input.xlsx) and a folder with documents (Folder Name: docs). The name of the parent folder is used as the general project name.
