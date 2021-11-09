@@ -17,7 +17,10 @@ knitr::opts_chunk$set(
 # Installation
 
 ```{r}
-# devtools::install_github("https://github.com/MatthiasUckert/RsClassification")
+devtools::install_github(
+  repo = "https://github.com/MatthiasUckert/RsClassification",
+  build_vignettes = TRUE
+  )
 ```
 
 # Library
