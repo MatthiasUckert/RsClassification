@@ -95,6 +95,6 @@ You can start classifying by using the ***run_app()*** function
 # RsClassification::run_app()
 ```
 
-The rest is hopefully self explanatory :-D
+The rest is hopefully self-explanatory :-D
 
 Library will be heavily updated over the next weeks/months. Hopefully not so many breaking changes
