@@ -23,7 +23,6 @@ app_ui <- function(request) {
               width = 2,
               mod_download_results_ui("download_results_ui_1"),
               hr(),
-              # textInput("user", "User Name", placeholder = "User Name"),
               DT::dataTableOutput("excel_table_data_dt")
             ),
             mainPanel = mainPanel(
