@@ -110,6 +110,7 @@ mod_display_files_server <- function(id, .reactive_path) {
 ## To be copied in the server
 # mod_display_files_server("display_files_ui_1")
 
+
 # demo <- function() {
 #   ui <- fluidPage(
 #     fileInput("file", "File"),
@@ -119,7 +120,7 @@ mod_display_files_server <- function(id, .reactive_path) {
 #   server <- function(input, output, session) {
 #     r <- reactive(input$file$datapath)
 #     mod_display_files_server("display_files_ui_1", r)
-#     
+# 
 #     print_reactive(r)
 #   }
 #   shinyApp(ui, server)
