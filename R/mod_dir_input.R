@@ -52,14 +52,16 @@ mod_dir_input_server <- function(id, input) {
       
       
       if (check_excel_) {
-        tab_data_ <- tibble::as_tibble(openxlsx::read.xlsx(path_excel_, 1))
-        tab_cols_ <- dplyr::filter(tab_data_, id == 0) %>%
-          dplyr::select(-id) %>%
-          tidyr::pivot_longer(dplyr::everything())
-        tab_data_ <- dplyr::filter(tab_data_, !id == 0)
+        tab_data_ <- tibble::as_tibble(openxlsx::read.xlsx(path_excel_, "data", detectDates = TRUE))
+        tab_spec_ <- tibble::as_tibble(openxlsx::read.xlsx(path_excel_, "spec"))
+        
+        # tab_cols_ <- dplyr::filter(tab_data_, id == 0) %>%
+        #   dplyr::select(-id) %>%
+        #   tidyr::pivot_longer(dplyr::everything())
+        # tab_data_ <- dplyr::filter(tab_data_, !id == 0)
         
         tab_fils_ <- lft(path_docs_)
-        tab_docs_ <- openxlsx::read.xlsx(path_excel_, 2) %>%
+        tab_docs_ <- openxlsx::read.xlsx(path_excel_, "docs") %>%
           tibble::as_tibble() %>%
           dplyr::left_join(
             y = tidyr::unite(tab_fils_, doc_id, doc_id, file_ext, sep = ""), 
@@ -80,7 +82,7 @@ mod_dir_input_server <- function(id, input) {
         check_data = check_data_,
         name_project = name_project_,
         data = tab_data_,
-        cols = tab_cols_,
+        cols = tab_spec_,
         docs = tab_docs_,
         fils = tab_fils_
       )
