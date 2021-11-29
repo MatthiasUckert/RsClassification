@@ -29,12 +29,15 @@ app_server <- function(input, output, session) {
   
   rdocs_row <- reactive({
     if (rinit()$start) {
-      fct_get_current_docs(rinit()$values$docs, .id = rlrc_data())
+      fct_get_current_docs(rinit()$values$docs, .id = rVdata()[["id"]][rlrc_data()])
     }
   })
   
   rfile_path <- reactive(rdocs_row()[["path"]][rlrc_docs()])
   rid <- reactive(rVdata()[["id"]][rlrc_data()])
+  
+  # observe({print(rfile_path())})
+  # observe({print(rdocs_row())})
   
   
   # Outputs -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -111,9 +114,9 @@ app_server <- function(input, output, session) {
   
 }
 
-
-tibble::tibble(
-  id = 1:5,
-  val1 = c(1, NA, 2, NA, 3),
-  val2 = c(NA, 1, 1, NA, 1)
-)  
+# 
+# tibble::tibble(
+#   id = 1:5,
+#   val1 = c(1, NA, 2, NA, 3),
+#   val2 = c(NA, 1, 1, NA, 1)
+# )  
