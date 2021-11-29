@@ -17,10 +17,10 @@ knitr::opts_chunk$set(
 # Installation
 
 ```{r}
-devtools::install_github(
-  repo = "https://github.com/MatthiasUckert/RsClassification",
-  build_vignettes = TRUE
-  )
+# devtools::install_github(
+#   repo = "https://github.com/MatthiasUckert/RsClassification",
+#   build_vignettes = TRUE
+#   )
 ```
 
 # Library
@@ -33,7 +33,7 @@ library(RsClassification); library(fs); library(openxlsx); library(kableExtra)
 
 Really short description on how to use the ***RsClassification*** library
 
-## Example Project  
+## Example Project
 
 The library includes a test project as reference. The project can be downloaded with the ***download_example_project()*** function (see below).
 
@@ -71,7 +71,7 @@ The input xlsx must contain two sheets:
 The example file looks like this
 
 ```{r}
-.path <- file.path(.dir, "input.xlsx")
+.path    <- file.path(.dir, "input.xlsx")
 tab_ids  <- read.xlsx(.path, "IDs")
 tab_docs <- read.xlsx(.path, "Documents")
 
