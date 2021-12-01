@@ -18,20 +18,27 @@ fct_format_rhandson <- function(.tab, .specs) {
     val_ <- unlist(stringi::stri_split_fixed(.specs$vals[i], "|"))
     
     if (!type_ == "character") {
+      
       if (all(!is.na(val_))) {
         tab_ <- rhandsontable::hot_col(tab_, col = col_, type = type_, source = val_)
       } else {
-        tab_ <- rhandsontable::hot_col(tab_, col = col_, type = type_)
+        if (type_ == "date") {
+          tab_ <- rhandsontable::hot_col(tab_, col = col_, type = type_)
+        } else {
+          tab_ <- rhandsontable::hot_col(tab_, col = col_, type = type_)
+        }
+        
+        
       }
-    }
+    } 
   }
   
   return(tab_)
 }
 
-
+# 
 # DF <- data.frame(
-#   val1 = 1:10,
+#   val1 = as.character(1:10),
 #   val2 = rep(NA_character_, 10),
 #   val3 = rep(NA_character_, 10)
 # )
@@ -59,13 +66,27 @@ fct_format_rhandson <- function(.tab, .specs) {
 #     } else {
 #       tab_ <- rhandsontable::hot_col(tab_, col = col_, type = type_)
 #     }
+#   } else {
+#     tab_ <- rhandsontable::hot_col(tab_, col = col_, allowInvalid = TRUE)
 #   }
 # }
 # 
 # tab_
+# #
+# #
+# # rhandsontable(DF, rowHeaders = NULL) %>%
+# #   hot_col(col = "big", type = "dropdown", source = LETTERS) %>%
+# #   hot_col(col = "small", type = "autocomplete", source = letters,
+# #           strict = FALSE)
 # 
+# 
+# library(rhandsontable)
+# DF = data.frame(val = 1:10, bool = TRUE, big = LETTERS[1:10],
+#                 small = letters[1:10],
+#                 dt = seq(from = Sys.Date(), by = "days", length.out = 10),
+#                 stringsAsFactors = FALSE)
 # 
 # rhandsontable(DF, rowHeaders = NULL) %>%
-#   hot_col(col = "big", type = "dropdown", source = LETTERS) %>%
+#   hot_col(col = "big", type = NULL) %>%
 #   hot_col(col = "small", type = "autocomplete", source = letters,
 #           strict = FALSE)
