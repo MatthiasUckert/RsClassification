@@ -33,6 +33,7 @@ usethis::use_package("stringi")
 usethis::use_package("tibble")
 usethis::use_package("tidyr")
 usethis::use_package("fs")
+usethis::use_package("ggthemes")
 
 usethis::use_pipe()
 
@@ -42,6 +43,7 @@ golem::add_module(name = "excel_input")
 golem::add_module(name = "dir_input")
 golem::add_module(name = "display_files")
 golem::add_module(name = "download_results")
+golem::add_module(name = "overview")
 
 
 ## Add helper functions ----
