@@ -10,22 +10,15 @@
 mod_dir_input_ui <- function(id){
   ns <- NS(id)
   tagList(
-    sidebarLayout(
-      sidebarPanel = sidebarPanel(
-        width = 3,
-        textInput(
-          inputId = ns("dir"), 
-          label = "Full Path to the Directory", 
-          placeholder = "Directory Path"
-          ),
-        hr(),
-        actionButton(ns("start_project"), label = "Start Project"),
-        h3("Overview"),
-        tableOutput(ns("overview"))
-      ),
-      mainPanel = mainPanel()
-    )
-
+    textInput(
+      inputId = ns("dir"), 
+      label = "Full Path to the Directory", 
+      placeholder = "Directory Path"
+    ),
+    hr(),
+    actionButton(ns("start_project"), label = "Start Project"),
+    h3("Overview"),
+    tableOutput(ns("overview"))
   )
 }
     
@@ -45,21 +38,33 @@ mod_dir_input_server <- function(id, input) {
       check_excel_ <- file.exists(path_excel_)
       path_docs_   <- file.path(input$dir, "docs")
       check_docs_  <- file.exists(path_docs_)
-      path_data_  <- file.path(input$dir, "data", "data.rds")
-      check_data_ <- file.exists(path_data_)
+      path_data_   <- file.path(input$dir, "data", "data.rds")
+      check_data_  <- file.exists(path_data_)
       
       name_project_ <- janitor::make_clean_names(basename(input$dir))
       
       
       if (check_excel_) {
-        tab_data_ <- tibble::as_tibble(openxlsx::read.xlsx(path_excel_, "data", detectDates = TRUE))
         tab_spec_ <- tibble::as_tibble(openxlsx::read.xlsx(path_excel_, "spec"))
+        tab_data_ <- tibble::as_tibble(openxlsx::read.xlsx(path_excel_, "data", detectDates = TRUE)) %>%
+          dplyr::arrange(id)
         
-        # tab_cols_ <- dplyr::filter(tab_data_, id == 0) %>%
-        #   dplyr::select(-id) %>%
-        #   tidyr::pivot_longer(dplyr::everything())
-        # tab_data_ <- dplyr::filter(tab_data_, !id == 0)
-        
+        if (!all.equal(sort(tab_spec_$col), sort(tab_spec_$col))) {
+          stop("Column Specifications don't match columns", call. = FALSE)
+        } else {
+          for (i in seq_len(nrow(tab_spec_))) {
+            col_ <- tab_spec_$col[i]
+            type_ <- tab_spec_$type[i]
+            if (type_ %in% c("character", "dropdown")) {
+              tab_data_[[col_]] <- as.character(tab_data_[[col_]])
+            } else if (type_ == "numeric") {
+              tab_data_[[col_]] <- as.numeric(tab_data_[[col_]])
+            } else if (type_ == "date") {
+              tab_data_[[col_]] <- as.Date(tab_data_[[col_]], format = "%Y-%m-%d")
+            }
+          }
+        }
+
         tab_fils_ <- lft(path_docs_)
         tab_docs_ <- openxlsx::read.xlsx(path_excel_, "docs") %>%
           tibble::as_tibble() %>%
