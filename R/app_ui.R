@@ -13,8 +13,16 @@ app_ui <- function(request) {
     fluidPage(
       tabsetPanel(
         tabPanel(
-          title = "File Input",
-          mod_dir_input_ui("dir_input_ui_1")
+          title = "File Input & Overview",
+          sidebarLayout(
+            sidebarPanel(
+              width = 3,
+              mod_dir_input_ui("dir_input_ui_1")
+            ),
+            mainPanel(
+              mod_overview_ui("overview_ui_1")
+            )
+          )
         ),
         tabPanel(
           title = "Classification",
