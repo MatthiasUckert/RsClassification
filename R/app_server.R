@@ -41,6 +41,12 @@ app_server <- function(input, output, session) {
   
   
   # Outputs -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+  
+  # Overview
+  mod_overview_server("overview_ui_1", rinit)
+  
+  observe({print(rinit())})
+  
   # Current ID
   output$html_id <- function() {
     paste0(h3(paste0("Current ID: ", rid())))
@@ -96,6 +102,7 @@ app_server <- function(input, output, session) {
   )
   
   # Update Results -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -
+  
   observeEvent(input$submit, {
     if (!is.null(input$excel_table_data_rh)) {
       tab_ <- rhandsontable::hot_to_r(input$excel_table_data_rh)
