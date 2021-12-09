@@ -36,8 +36,7 @@ app_server <- function(input, output, session) {
   rfile_path <- reactive(rdocs_row()[["path"]][rlrc_docs()])
   rid <- reactive(rVdata()[["id"]][rlrc_data()])
   
-  # observe({print(rfile_path())})
-  # observe({print(rdocs_row())})
+  observe({print(rinit())})
   
   
   # Outputs -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
@@ -45,7 +44,7 @@ app_server <- function(input, output, session) {
   # Overview
   mod_overview_server("overview_ui_1", rinit)
   
-  observe({print(rinit())})
+  # observe({print(rinit())})
   
   # Current ID
   output$html_id <- function() {
@@ -121,8 +120,6 @@ app_server <- function(input, output, session) {
     rVdata(tab_)
   }, priority = 1)
   
-  
-  print_reactive(rVpage)
   
   
 }

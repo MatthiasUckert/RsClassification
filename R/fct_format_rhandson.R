@@ -28,7 +28,6 @@ fct_format_rhandson <- function(.tab, .specs) {
           tab_ <- rhandsontable::hot_col(tab_, col = col_, type = type_)
         }
         
-        
       }
     } 
   }

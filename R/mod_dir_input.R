@@ -52,6 +52,7 @@ mod_dir_input_server <- function(id, input) {
         if (!all.equal(sort(tab_spec_$col), sort(tab_spec_$col))) {
           stop("Column Specifications don't match columns", call. = FALSE)
         } else {
+          
           for (i in seq_len(nrow(tab_spec_))) {
             col_ <- tab_spec_$col[i]
             type_ <- tab_spec_$type[i]
