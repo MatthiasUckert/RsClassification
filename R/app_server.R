@@ -52,6 +52,12 @@ app_server <- function(input, output, session) {
     paste0(h3(paste0("Current ID: ", rid())))
   } 
   
+  output$doc_paths <- function() {
+    paste(
+      rdocs_row()[["path"]], collapse = "<br>"
+    )
+  }
+  
   # Data: Datatable in SidePanel
   output$excel_table_data_dt <- DT::renderDataTable({
     rVdata() %>%

@@ -41,6 +41,7 @@ app_ui <- function(request) {
               hr(),
               fluidRow(
                 htmlOutput("html_id"),
+                htmlOutput("doc_paths"),
                 col_02(
                   h4("Documents"), 
                   DT::dataTableOutput("excel_table_docs_dt") 
