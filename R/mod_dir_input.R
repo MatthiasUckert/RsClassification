@@ -74,6 +74,7 @@ mod_dir_input_server <- function(id, input) {
           }
         }
 
+        tab_data_ <- tab_data_[, tab_spec_$col]
         tab_fils_ <- lft(path_docs_)
         tab_docs_ <- openxlsx::read.xlsx(path_excel_, "docs") %>%
           tibble::as_tibble() %>%
