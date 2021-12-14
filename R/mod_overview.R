@@ -18,12 +18,14 @@ mod_overview_ui <- function(id){
 #'
 #' @noRd 
 mod_overview_server <- function(id, .init) {
+  name <- value <- type <- NULL
+  
   moduleServer(id, function(input, output, session) {
     ns <- session$ns
 
     output$overview <- renderPlot({
       if (!is.null(.init()$values$dir_project)) {
-        tmp1 <- openxlsx::read.xlsx(file.path(.init()$values$dir_project, "input.xlsx")) %>%
+        tmp1 <- openxlsx::read.xlsx(file.path(.init()$values$path_excel)) %>%
           tibble::as_tibble() %>%
           dplyr::mutate(dplyr::across(dplyr::everything(), as.character)) %>%
           tidyr::pivot_longer(!dplyr::matches("^id$")) %>%

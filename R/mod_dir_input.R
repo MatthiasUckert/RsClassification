@@ -34,7 +34,15 @@ mod_dir_input_server <- function(id, input) {
       input$start_project
       input$dir
       
-      path_excel_  <- file.path(input$dir, "input.xlsx")
+      files_ <- lft(input$dir, "input.*xlsx")
+      
+      if (nrow(files_) == 0) {
+        stop("No Input File Found", call. = FALSE)
+      } else if (nrow(files_) > 1) {
+        stop("More than one Input File Found", call. = FALSE)
+      }
+      
+      path_excel_  <- files_[["path"]]
       check_excel_ <- file.exists(path_excel_)
       path_docs_   <- file.path(input$dir, "docs")
       check_docs_  <- file.exists(path_docs_)
